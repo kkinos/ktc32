@@ -30,3 +30,11 @@ KTC16 has three formats of instruction.
 | SW          | S/J    | 000111 | M[x[rs1] + imm] = x[rs2]         |
 | JMP         | S/J    | 000001 | PC = imm                         |
 | JEQ         | S/J    | 100001 | if(x[rs1] == x[rs2]) PC = imm    |
+
+## Running Test Benches
+
+`test/`
+
+```bash
+make
+```
