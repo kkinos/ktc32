@@ -28,11 +28,11 @@ FF
 // ADD r5, r4
 60
 21
-// JEQ r5, r7
+// JEQ r5, r7, 60
 61
 39
-FF
-FF
+3C
+00
 // SLT r4, r3
 08
 19
