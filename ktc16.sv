@@ -4,8 +4,8 @@ module ktc16 (
     input logic [31:0] rd,
 
     output logic memwrite,
-    output logic [31:0] addr,
-    output logic [31:0] wd
+    output logic [15:0] addr,
+    output logic [15:0] wd
 );
 
   logic pcen;
@@ -16,7 +16,7 @@ module ktc16 (
   logic alusrca;
   logic [1:0] alusrcb;
   logic [2:0] alucontrol;
-  logic  pcsrc;
+  logic pcsrc;
   logic [31:0] instr;
   logic zero;
 
@@ -50,17 +50,17 @@ module ktc16 (
       zero,
 
       pcen,
-	  
-	  memtoreg,
+
+      memtoreg,
       iord,
-	  pcsrc,
-	  alusrca,
+      pcsrc,
+      alusrca,
       alusrcb,
       alucontrol,
 
       memwrite,
       irwrite,
-      regwrite   
+      regwrite
   );
 
 endmodule

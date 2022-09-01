@@ -5,8 +5,8 @@ module fibonacci_tb;
   logic clk, reset;
   logic [31:0] rd;
 
-  logic [31:0] addr;
-  logic [31:0] wd;
+  logic [15:0] addr;
+  logic [15:0] wd;
   logic memwrite;
 
   parameter STEP = 10;

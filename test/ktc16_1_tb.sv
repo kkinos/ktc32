@@ -5,8 +5,8 @@ module ktc16_1_tb;
   logic clk, reset;
   logic [31:0] rd;
 
-  logic [31:0] addr;
-  logic [31:0] wd;
+  logic [15:0] addr;
+  logic [15:0] wd;
   logic memwrite;
 
   parameter STEP = 10;
@@ -44,12 +44,12 @@ module ktc16_1_tb;
 
   initial $readmemh("ktc16_1.mem", ram.mem);
 
-    always @(negedge clk) begin
+  always @(negedge clk) begin
     if (memwrite) begin
       if (wd == 7 && addr == 84) begin
         $display("=== ktc16_1 succeeded ===");
         $finish;
-      end else if (addr != 80)begin
+      end else if (addr != 80) begin
         $display("=== ktc16_1 failed ===");
         $finish;
       end

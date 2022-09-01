@@ -16,13 +16,12 @@ module datapath (
 
     output logic [31:0] instr,
     output logic zero,
-    output logic [31:0] extaddr,
-    output logic [31:0] wd
+    output logic [15:0] addr,
+    output logic [15:0] wd
 );
 
   logic [15:0] pc;
   logic [15:0] pcnext;
-  logic [15:0] addr;
   logic [15:0] data;
   logic [15:0] wd3;
   logic [15:0] rd1;
@@ -53,8 +52,6 @@ module datapath (
       iord,
       addr
   );
-
-  assign extaddr = {16'b0 + addr};
 
   flopenr #(
       .WIDTH(32)
@@ -113,7 +110,7 @@ module datapath (
       b
   );
 
-  assign wd = {16'b0 + b};
+  assign wd = b;
 
 
   mux2 #(
@@ -135,7 +132,7 @@ module datapath (
   );
 
 
-mux4 #(
+  mux4 #(
       .WIDTH(16)
   ) srcbmux (
       b,
@@ -146,7 +143,7 @@ mux4 #(
       srcb
   );
 
- alu alu (
+  alu alu (
       srca,
       srcb,
       alucontrol,
@@ -154,7 +151,7 @@ mux4 #(
       zero
   );
 
-   flopr #(
+  flopr #(
       .WIDTH(16)
   ) resreg (
       clk,
@@ -163,9 +160,9 @@ mux4 #(
       aluout
   );
 
-   mux2 #(
+  mux2 #(
       .WIDTH(16)
-   ) resmux (
+  ) resmux (
       alures,
       instr[31:16],
       pcsrc,
