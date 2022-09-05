@@ -12,8 +12,8 @@ module alu (
       3'b000: res = srca & srcb;
       3'b001: res = srca | srcb;
       3'b010: res = srca + srcb;
-      3'b110: res = srca - srcb;
-      3'b111: res = (srca < srcb) ? 1 : 0;
+      3'b110: res = srcb - srca;
+      3'b111: res = (srcb < srca) ? 1 : 0;
     endcase
     zero = ~(|res);
   end
