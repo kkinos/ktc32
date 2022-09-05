@@ -43,7 +43,6 @@ module ktc16_1_tb;
   );
 
   initial $readmemh("ktc16_1.mem", ram.mem);
-
   always @(negedge clk) begin
     if (memwrite) begin
       if (wd == 7 && addr == 84) begin
