@@ -42,7 +42,7 @@ module fibonacci_tb;
       rd
   );
 
-  initial $readmemh("fibonacci.mem", ram.mem);
+  initial $readmemh("../program/fibonacci/program.mem", ram.mem);
 
   always @(negedge clk) begin
     if (memwrite) begin

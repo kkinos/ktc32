@@ -1,3 +1,2 @@
 *.vcd
-fibonacci_tb
-ktc16_1_tb
+*_tb

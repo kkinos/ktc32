@@ -7,6 +7,7 @@ module ram (
 );
 
   logic [7:0] mem[0:32767];
+  initial $readmemh("program.mem", mem);
 
   always_ff @(posedge clk) begin
     if (we) begin

@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-module ktc16_1_tb;
+module inst1_tb;
 
   logic clk, reset;
   logic [31:0] rd;
@@ -42,14 +42,15 @@ module ktc16_1_tb;
       rd
   );
 
-  initial $readmemh("ktc16_1.mem", ram.mem);
+  initial $readmemh("../program/inst1/program.mem", ram.mem);
+
   always @(negedge clk) begin
     if (memwrite) begin
       if (wd == 7 && addr == 84) begin
-        $display("=== ktc16_1 succeeded ===");
+        $display("=== inst1 succeeded ===");
         $finish;
       end else if (addr != 80) begin
-        $display("=== ktc16_1 failed ===");
+        $display("=== inst1 failed ===");
         $finish;
       end
     end
@@ -57,8 +58,8 @@ module ktc16_1_tb;
 
 
   initial begin
-    $dumpfile("ktc16_1_tb.vcd");
-    $dumpvars(0, ktc16_1_tb);
+    $dumpfile("inst1_tb.vcd");
+    $dumpvars(0, inst1_tb);
   end
 
 endmodule
