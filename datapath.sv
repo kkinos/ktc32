@@ -16,26 +16,26 @@ module datapath (
 
     output logic [31:0] instr,
     output logic zero,
-    output logic [15:0] addr,
-    output logic [15:0] wd
+    output logic [31:0] addr,
+    output logic [31:0] wd
 );
 
-  logic [15:0] pc;
-  logic [15:0] pcnext;
-  logic [15:0] data;
-  logic [15:0] wd3;
-  logic [15:0] rd1;
-  logic [15:0] rd2;
-  logic [15:0] a;
-  logic [15:0] b;
-  logic [15:0] pcplus;
-  logic [15:0] srca;
-  logic [15:0] srcb;
-  logic [15:0] alures;
-  logic [15:0] aluout;
+  logic [31:0] pc;
+  logic [31:0] pcnext;
+  logic [31:0] data;
+  logic [31:0] wd3;
+  logic [31:0] rd1;
+  logic [31:0] rd2;
+  logic [31:0] a;
+  logic [31:0] b;
+  logic [31:0] pcplus;
+  logic [31:0] srca;
+  logic [31:0] srcb;
+  logic [31:0] alures;
+  logic [31:0] aluout;
 
   flopenr #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) pcreg (
       clk,
       reset,
@@ -45,7 +45,7 @@ module datapath (
   );
 
   mux2 #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) admux (
       pc,
       aluout,
@@ -64,16 +64,16 @@ module datapath (
   );
 
   flopr #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) datareg (
       clk,
       reset,
-      rd[15:0],
+      rd[31:0],
       data
   );
 
   mux2 #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) wdmux (
       aluout,
       data,
@@ -93,7 +93,7 @@ module datapath (
   );
 
   flopr #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) rd1reg (
       clk,
       reset,
@@ -102,7 +102,7 @@ module datapath (
   );
 
   flopr #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) rd2reg (
       clk,
       reset,
@@ -114,7 +114,7 @@ module datapath (
 
 
   mux2 #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) srcamux (
       pc,
       a,
@@ -123,22 +123,22 @@ module datapath (
   );
 
   mux2 #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) pcplusmux (
-      16'd2,
-      16'd4,
+      32'd2,
+      32'd4,
       rd[0],
       pcplus
   );
 
 
   mux4 #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) srcbmux (
       b,
       pcplus,
-      16'b0,
-      instr[31:16],
+      32'b0,
+      {{16{instr[31]}}, instr[31:16]},
       alusrcb,
       srcb
   );
@@ -152,7 +152,7 @@ module datapath (
   );
 
   flopr #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) resreg (
       clk,
       reset,
@@ -161,10 +161,10 @@ module datapath (
   );
 
   mux2 #(
-      .WIDTH(16)
+      .WIDTH(32)
   ) resmux (
       alures,
-      instr[31:16],
+      aluout,
       pcsrc,
       pcnext
   );

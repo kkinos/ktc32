@@ -1,11 +1,11 @@
-module ktc16 (
+module ktc32 (
     input logic clk,
     input logic reset,
     input logic [31:0] rd,
 
     output logic memwrite,
-    output logic [15:0] addr,
-    output logic [15:0] wd
+    output logic [31:0] addr,
+    output logic [31:0] wd
 );
 
   logic pcen;

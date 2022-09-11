@@ -75,16 +75,16 @@ module maindec (
           SUB:  nextstate = S6;
           AND:  nextstate = S6;
           OR:   nextstate = S6;
-          SLT: nextstate = S6;
-          JEQ: nextstate = S8;
-          JMP: nextstate = S10;
+          SLT:  nextstate = S6;
+          JEQ:  nextstate = S8;
+          JMP:  nextstate = S10;
         endcase
         memtoreg = 'x;
         iord = 'x;
         pcsrc = 'x;
-        alusrca = 'x;
-        alusrcb = 'x;
-        alucontrol = 'x;
+        alusrca = 1'b0;
+        alusrcb = 2'b11;
+        alucontrol = 3'b010;
 
         irwrite = 1'b0;
         memwrite = 1'b0;
@@ -191,7 +191,7 @@ module maindec (
             ADD: alucontrol = 3'b010;
             SUB: alucontrol = 3'b110;
             AND: alucontrol = 3'b000;
-            OR: alucontrol = 3'b001;
+            OR:  alucontrol = 3'b001;
             SLT: alucontrol = 3'b111;
           endcase
 

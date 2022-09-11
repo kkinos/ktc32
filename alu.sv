@@ -1,9 +1,9 @@
 module alu (
-    input logic [15:0] srca,
-    input logic [15:0] srcb,
+    input logic [31:0] srca,
+    input logic [31:0] srcb,
     input logic [ 2:0] alucontrol,
 
-    output logic [15:0] res,
+    output logic [31:0] res,
     output logic zero
 );
 

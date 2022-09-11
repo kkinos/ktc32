@@ -5,8 +5,8 @@ module inst1_tb;
   logic clk, reset;
   logic [31:0] rd;
 
-  logic [15:0] addr;
-  logic [15:0] wd;
+  logic [31:0] addr;
+  logic [31:0] wd;
   logic memwrite;
 
   parameter STEP = 10;
@@ -24,7 +24,7 @@ module inst1_tb;
     #STEP reset = 0;
   end
 
-  ktc16 ktc16 (
+  ktc32 ktc32 (
       clk,
       reset,
       rd,
