@@ -38,7 +38,6 @@ module inst1_tb;
       memwrite,
       addr,
       wd,
-
       rd
   );
 
