@@ -9,4 +9,4 @@ set_property -dict {PACKAGE_PIN E13 IOSTANDARD LVCMOS33} [get_ports {led[2]}];
 set_property -dict {PACKAGE_PIN H15 IOSTANDARD LVCMOS33} [get_ports {led[3]}];
 
 # RESET
-set_property -dict {PACKAGE_PIN C18 IOSTANDARD LVCMOS33} [get_ports {reset}];
+set_property -dict {PACKAGE_PIN C18 IOSTANDARD LVCMOS33} [get_ports {n_reset}];

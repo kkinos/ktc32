@@ -15,10 +15,10 @@ module arty_s7_led_loop_tb;
   end
 
   initial begin
-    reset = 0;
-    #STEP reset = 1;
+    reset = 1;
     #STEP reset = 0;
-    #(STEP * 40000) $finish;
+    #STEP reset = 1;
+    #(STEP * 10000) $finish;
   end
 
   top top (

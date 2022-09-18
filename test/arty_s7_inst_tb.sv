@@ -15,9 +15,9 @@ module arty_s7_inst_tb;
   end
 
   initial begin
-    reset = 0;
-    #STEP reset = 1;
+    reset = 1;
     #STEP reset = 0;
+    #STEP reset = 1;
     #(STEP * 400) $finish;
   end
 
