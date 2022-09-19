@@ -33,8 +33,6 @@ KTC32 has three formats of instruction.
 
 ## Running Test Benches
 
-`test/`
-
 ```bash
 make
 ```
