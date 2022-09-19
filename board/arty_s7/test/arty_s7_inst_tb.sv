@@ -27,7 +27,7 @@ module arty_s7_inst_tb;
       led
   );
 
-  initial $readmemh("../program/arty_s7/inst/program.mem", top.ram.mem);
+  initial $readmemh("../program/inst/program.mem", top.ram.mem);
 
   initial begin
     $dumpfile("arty_s7_inst_tb.vcd");

@@ -27,7 +27,7 @@ module arty_s7_led_loop_tb;
       led
   );
 
-  initial $readmemh("../program/arty_s7/led_loop/program.mem", top.ram.mem);
+  initial $readmemh("../program/led_loop/program.mem", top.ram.mem);
 
   initial begin
     $dumpfile("arty_s7_led_loop_tb.vcd");
