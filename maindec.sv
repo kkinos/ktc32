@@ -18,7 +18,7 @@ module maindec (
 );
 
   parameter MOV = 6'b000000, ADD = 6'b100000, SUB = 6'b110000, AND = 6'b010000, OR = 6'b011000, SLT = 6'b001000;
-  parameter LW = 6'b000011, ADDI = 6'b100011;
+  parameter LW = 6'b000011, ADDI = 6'b100011, LUI = 6'b110111;
   parameter SW = 6'b000111;
   parameter JMP = 6'b000001, JEQ = 6'b100001;
 
@@ -70,6 +70,7 @@ module maindec (
           LW:   nextstate = S2;
           SW:   nextstate = S2;
           ADDI: nextstate = S9;
+          LUI:  nextstate = S9;
           MOV:  nextstate = S6;
           ADD:  nextstate = S6;
           SUB:  nextstate = S6;
@@ -246,12 +247,14 @@ module maindec (
         pcsrc = 1'b0;
         alusrca = 1'b1;
         alusrcb = 2'b11;
-        alucontrol = 3'b010;
-
-        irwrite = 1'b0;
+        case (op)
+          ADDI: alucontrol = 3'b010;
+          LUI:  alucontrol = 3'b100;
+        endcase
+        irwrite  = 1'b0;
         memwrite = 1'b0;
-        pcwrite = 1'b0;
-        branch = 1'b0;
+        pcwrite  = 1'b0;
+        branch   = 1'b0;
         regwrite = 1'b0;
       end
 

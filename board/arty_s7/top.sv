@@ -9,6 +9,7 @@ module top (
   logic [31:0] wd;
   logic memwrite;
   logic reset;
+
   assign reset = ~n_reset;
 
   ktc32 ktc32 (
@@ -25,16 +26,9 @@ module top (
       memwrite,
       addr,
       wd,
-      rd
+      rd,
+      led
   );
 
-
-  always_ff @(posedge clk) begin
-    if (memwrite && (addr == 16'h54)) begin
-      led <= wd[3:0];
-    end else begin
-      led <= led;
-    end
-  end
 
 endmodule
