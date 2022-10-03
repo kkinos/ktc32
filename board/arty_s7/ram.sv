@@ -9,32 +9,38 @@ module ram (
 
   logic [7:0] mem[0:1024];
   logic [7:0] io[0:31];
-  logic mem_sel;
   logic io_sel;
-  logic [31:0] ram_addr;
+  logic [31:0] io_addr;
 
   initial $readmemh("program.mem", mem);
 
-  assign mem_sel  = (addr[31:20] == 12'h000) ? 1 : 0;
-  assign io_sel   = (addr[31:20] == 12'hFFF) ? 1 : 0;
-  assign ram_addr = {12'h0, addr[19:0]};
+  assign io_sel  = (addr[31:20] == 12'hFFF) ? 1 : 0;
+  assign io_addr = {12'h0, addr[19:0]};
 
 
   always_ff @(posedge clk) begin
-    if (mem_sel && we) begin
-      mem[ram_addr]   <= wd[7:0];
-      mem[ram_addr+1] <= wd[15:8];
-      mem[ram_addr+2] <= wd[23:16];
-      mem[ram_addr+3] <= wd[31:24];
-    end else if (io_sel && we) begin
-      io[ram_addr]   <= wd[7:0];
-      io[ram_addr+1] <= wd[15:8];
-      io[ram_addr+2] <= wd[23:16];
-      io[ram_addr+3] <= wd[31:24];
+    if (we) begin
+      if (io_sel) begin
+        io[io_addr]   <= wd[7:0];
+        io[io_addr+1] <= wd[15:8];
+        io[io_addr+2] <= wd[23:16];
+        io[io_addr+3] <= wd[31:24];
+      end else begin
+        mem[addr]   <= wd[7:0];
+        mem[addr+1] <= wd[15:8];
+        mem[addr+2] <= wd[23:16];
+        mem[addr+3] <= wd[31:24];
+      end
     end
   end
 
-  assign data = (mem_sel) ? {mem[ram_addr+3], mem[ram_addr+2], mem[ram_addr+1], mem[ram_addr]} : 32'h0;
+  always_comb begin
+    if (io_sel) begin
+      data = {io[io_addr+3], io[io_addr+2], io[io_addr+1], io[io_addr]};
+    end else begin
+      data = {mem[addr+3], mem[addr+2], mem[addr+1], mem[addr]};
+    end
+  end
 
   assign led = io[0][3:0];
 
