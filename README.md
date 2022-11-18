@@ -1,6 +1,6 @@
 # KTC32
 
-Hobby CPU implemented in SystemVerilog
+A hobby 32-bit CPU implemented in SystemVerilog
 
 ## Instruction Set
 
@@ -47,6 +47,16 @@ KTC32 has four formats of instruction.
 | SH          | I32    | 110100 | M[x[rs] + sext(imm)] = x[rd][15:0]             | sh rd, rs, imm    |
 | SW          | I32    | 110101 | M[x[rs] + sext(imm)] = x[rd]                   | sw rd, rs, imm    |
 | JAL         | J      | 111111 | x[rd] = pc, pc += sext(imm)                    | jal rd, imm       |
+
+## Design
+
+### RTL
+
+![rtl](docs/rtl.drawio.png)
+
+### FSM
+
+![fsm](docs/fsm.drawio.png)
 
 ## Running Test Benches
 
