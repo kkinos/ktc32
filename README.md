@@ -21,9 +21,9 @@ KTC32 has four formats of instruction.
 | SRA         | R      | 001000 | x[rd] = x[rd] >><sub>s</sub> x[rs]             | sra rd, rs        |
 | SLT         | R      | 001001 | flag = (x[rd] <<sub>s</sub> x[rs])? 1 : 0      | slt rd, rs        |
 | SLTU        | R      | 001010 | flag = (x[rd] <<sub>u</sub> x[rs])? 1 : 0      | sltu rd, rs       |
-| SLLI        | I16    | 000110 | x[rd] = x[rd] << imm                           | slli rd, imm      |
-| SRLI        | I16    | 000111 | x[rd] = x[rd] >><sub>u</sub> imm               | srli rd, imm      |
-| SRAI        | I16    | 001000 | x[rd] = x[rd] >><sub>s</sub> imm               | srai rd, imm      |
+| SLLI        | I16    | 010000 | x[rd] = x[rd] << imm                           | slli rd, imm      |
+| SRLI        | I16    | 010001 | x[rd] = x[rd] >><sub>u</sub> imm               | srli rd, imm      |
+| SRAI        | I16    | 010010 | x[rd] = x[rd] >><sub>s</sub> imm               | srai rd, imm      |
 | ADDI        | I32    | 100000 | x[rd] = x[rs] + sext(imm)                      | addi rd, rs, imm  |
 | ANDI        | I32    | 100001 | x[rd] = x[rs] & sext(imm)                      | andi rd, rs, imm  |
 | ORI         | I32    | 100010 | x[rd] = x[rs] \| sext(imm)                     | ori rd, rs, imm   |
