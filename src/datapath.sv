@@ -3,19 +3,22 @@ module datapath (
     input logic reset,
 
     input logic [31:0] rd,
+
     input logic pcen,
 
     input logic iord,
-    input logic irwrite,
-    input logic memtoreg,
-    input logic regwrite,
-    input logic alusrca,
+    input logic regdst,
+    input logic [1:0] memtoreg,
+    input logic [1:0] alusrca,
     input logic [1:0] alusrcb,
-    input logic [2:0] alucontrol,
+    input logic [4:0] alucontrol,
     input logic pcsrc,
 
+    input logic irwrite,
+    input logic [2:0] regwrite,
+
     output logic [31:0] instr,
-    output logic zero,
+    output logic flag,
     output logic [31:0] addr,
     output logic [31:0] wd
 );
@@ -23,6 +26,7 @@ module datapath (
   logic [31:0] pc;
   logic [31:0] pcnext;
   logic [31:0] data;
+  logic [ 4:0] writereg;
   logic [31:0] wd3;
   logic [31:0] rd1;
   logic [31:0] rd2;
@@ -68,15 +72,25 @@ module datapath (
   ) datareg (
       clk,
       reset,
-      rd[31:0],
+      rd,
       data
   );
 
   mux2 #(
+      .WIDTH(5)
+  ) wrmux (
+      instr[10:6],
+      5'b11111,
+      regdst,
+      writereg
+  );
+
+  mux3 #(
       .WIDTH(32)
   ) wdmux (
       aluout,
       data,
+      pc,
       memtoreg,
       wd3
   );
@@ -86,7 +100,7 @@ module datapath (
       regwrite,
       instr[15:11],
       instr[10:6],
-      instr[10:6],
+      writereg,
       wd3,
       rd1,
       rd2
@@ -112,11 +126,11 @@ module datapath (
 
   assign wd = b;
 
-
-  mux2 #(
+  mux3 #(
       .WIDTH(32)
   ) srcamux (
       pc,
+      {27'b0, instr[15:11]},
       a,
       alusrca,
       srca
@@ -127,18 +141,17 @@ module datapath (
   ) pcplusmux (
       32'd2,
       32'd4,
-      rd[0],
+      rd[5],
       pcplus
   );
-
 
   mux4 #(
       .WIDTH(32)
   ) srcbmux (
       b,
       pcplus,
-      32'b0,
       {{16{instr[31]}}, instr[31:16]},
+      {{11{instr[31]}}, instr[31:11]},
       alusrcb,
       srcb
   );
@@ -148,7 +161,7 @@ module datapath (
       srcb,
       alucontrol,
       alures,
-      zero
+      flag
   );
 
   flopr #(
@@ -168,6 +181,5 @@ module datapath (
       pcsrc,
       pcnext
   );
-
 
 endmodule

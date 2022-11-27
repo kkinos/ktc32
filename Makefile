@@ -1,4 +1,4 @@
-TESTDIRS=test board/arty_s7/test
+TESTDIRS:=tests
 
 .PHONY: all $(TESTDIRS)
 all: $(TESTDIRS)

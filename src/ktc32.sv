@@ -3,41 +3,48 @@ module ktc32 (
     input logic reset,
     input logic [31:0] rd,
 
-    output logic memwrite,
+    output logic [ 1:0] memwrite,
     output logic [31:0] addr,
     output logic [31:0] wd
 );
 
   logic pcen;
+
   logic iord;
-  logic irwrite;
-  logic memtoreg;
-  logic regwrite;
-  logic alusrca;
+  logic regdst;
+  logic [1:0] memtoreg;
+  logic [1:0] alusrca;
   logic [1:0] alusrcb;
-  logic [2:0] alucontrol;
+  logic [4:0] alucontrol;
   logic pcsrc;
+
+  logic irwrite;
+  logic [2:0] regwrite;
+
   logic [31:0] instr;
-  logic zero;
+  logic flag;
 
   datapath datapath (
       clk,
       reset,
 
       rd,
+
       pcen,
 
       iord,
-      irwrite,
+      regdst,
       memtoreg,
-      regwrite,
       alusrca,
       alusrcb,
       alucontrol,
       pcsrc,
 
+      irwrite,
+      regwrite,
+
       instr,
-      zero,
+      flag,
       addr,
       wd
   );
@@ -47,16 +54,17 @@ module ktc32 (
       reset,
 
       instr[5:0],
-      zero,
+      flag,
 
       pcen,
 
-      memtoreg,
       iord,
-      pcsrc,
+      regdst,
+      memtoreg,
       alusrca,
       alusrcb,
       alucontrol,
+      pcsrc,
 
       memwrite,
       irwrite,
