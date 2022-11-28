@@ -64,6 +64,12 @@ KTC32 has four formats of instruction.
 make
 ```
 
+### Required
+
+- [ktc32-asm](https://github.com/kinpoko/ktc32-asm)
+
+- Icarus Verilog
+
 ## Reference
 
 デイビット・マネー・ハリス、サラ・L・ハリス (2009) 『ディジタル電子回路とコンピュータアーキテクチャ 第 2 版』(天野英晴・鈴木貢・中條拓伯・永松礼夫訳) 翔泳社(Digital Design and Computer Architecture Second Edition)
