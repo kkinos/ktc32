@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-module arty_s7_inst_tb;
+module led_loop_tb;
 
   logic clk, reset;
   logic [3:0] led;
@@ -18,7 +18,7 @@ module arty_s7_inst_tb;
     reset = 1;
     #STEP reset = 0;
     #STEP reset = 1;
-    #(STEP * 400) $finish;
+    #(STEP * 5000000) $finish;
   end
 
   top top (
@@ -27,11 +27,11 @@ module arty_s7_inst_tb;
       led
   );
 
-  initial $readmemh("../program/inst/program.mem", top.ram.mem);
+  initial $readmemh("../program/led_loop.mem", top.ram.mem);
 
   initial begin
-    $dumpfile("arty_s7_inst_tb.vcd");
-    $dumpvars(0, arty_s7_inst_tb);
+    $dumpfile("led_loop_tb.vcd");
+    $dumpvars(0, led_loop_tb);
   end
 
 endmodule

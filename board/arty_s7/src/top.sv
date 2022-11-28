@@ -7,7 +7,7 @@ module top (
   logic [31:0] rd;
   logic [31:0] addr;
   logic [31:0] wd;
-  logic memwrite;
+  logic [1:0] memwrite;
   logic reset;
 
   assign reset = ~n_reset;
@@ -29,6 +29,5 @@ module top (
       rd,
       led
   );
-
 
 endmodule
