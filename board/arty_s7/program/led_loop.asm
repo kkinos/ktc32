@@ -1,6 +1,6 @@
 mov r1, r0
-lui r9, r9, -16
-lui r3, r3, 16
+lui r9, -16
+lui r3, 16
 addi r3, r3, 32767
 
 mov r2, r0
