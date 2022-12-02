@@ -42,7 +42,7 @@ KTC32 has four formats of instruction.
 | LBU         | I32    | 101111 | x[rd] = M[x[rs] + sext(imm)][7:0]              | lbu rd, rs, imm   |
 | LHU         | I32    | 110000 | x[rd] = M[x[rs] + sext(imm)][15:0]             | lhu rd, rs, imm   |
 | LW          | I32    | 110001 | x[rd] = M[x[rs] + sext(imm)]                   | lw rd, rs, imm    |
-| LUI         | I32    | 110010 | x[rd] = sext(imm) << 16                        | lui rd, rd, imm   |
+| LUI         | I32    | 110010 | x[rd] = sext(imm) << 16                        | lui rd, imm       |
 | SB          | I32    | 110011 | M[x[rs] + sext(imm)] = x[rd][7:0]              | sb rd, rs, imm    |
 | SH          | I32    | 110100 | M[x[rs] + sext(imm)] = x[rd][15:0]             | sh rd, rs, imm    |
 | SW          | I32    | 110101 | M[x[rs] + sext(imm)] = x[rd]                   | sw rd, rs, imm    |
