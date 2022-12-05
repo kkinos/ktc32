@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-module led_loop_tb;
+module serial_send_tb;
 
   logic clk, reset;
   logic [3:0] led;
@@ -29,11 +29,11 @@ module led_loop_tb;
       txd
   );
 
-  initial $readmemh("../program/led_loop.mem", top.ram.mem);
+  initial $readmemh("../program/serial_send.mem", top.ram.mem);
 
   initial begin
-    $dumpfile("led_loop_tb.vcd");
-    $dumpvars(0, led_loop_tb);
+    $dumpfile("serial_send_tb.vcd");
+    $dumpvars(0, serial_send_tb);
   end
 
 endmodule

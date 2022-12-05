@@ -1,7 +1,9 @@
 module top (
     input logic clk,
     input logic n_reset,
-    output logic [3:0] led
+
+    output logic [3:0] led,
+    output logic txd
 );
 
   logic [31:0] rd;
@@ -16,6 +18,7 @@ module top (
       clk,
       reset,
       rd,
+
       memwrite,
       addr,
       wd
@@ -23,11 +26,14 @@ module top (
 
   ram ram (
       clk,
+      reset,
       memwrite,
       addr,
       wd,
+
       rd,
-      led
+      led,
+      txd
   );
 
 endmodule

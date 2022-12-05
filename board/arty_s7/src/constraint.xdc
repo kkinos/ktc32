@@ -14,3 +14,6 @@ set_property -dict {PACKAGE_PIN H15 IOSTANDARD LVCMOS33} [get_ports {led[3]}];
 
 # RESET
 set_property -dict {PACKAGE_PIN C18 IOSTANDARD LVCMOS33} [get_ports {n_reset}];
+
+# UART
+set_property -dict { PACKAGE_PIN R12   IOSTANDARD LVCMOS33 } [get_ports { txd }];
