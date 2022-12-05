@@ -84,6 +84,7 @@ module ram (
   end
 
   always_comb begin
+    data = 32'h0;
     if (led_sel) begin
       if (io_addr == 32'h0) begin
         data = {24'h0, led_data};

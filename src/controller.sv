@@ -149,6 +149,7 @@ module controller (
           SH: nextstate = S2;
           SW: nextstate = S2;
           JAL: nextstate = S12;
+          default: nextstate = S0;
         endcase
 
         iord = 'x;
@@ -169,14 +170,15 @@ module controller (
 
       S2: begin
         case (opcode)
-          LB:  nextstate = S3;
-          LH:  nextstate = S3;
+          LB: nextstate = S3;
+          LH: nextstate = S3;
           LBU: nextstate = S3;
           LHU: nextstate = S3;
-          LW:  nextstate = S3;
-          SB:  nextstate = S5;
-          SH:  nextstate = S5;
-          SW:  nextstate = S5;
+          LW: nextstate = S3;
+          SB: nextstate = S5;
+          SH: nextstate = S5;
+          SW: nextstate = S5;
+          default: nextstate = S0;
         endcase
 
         iord = 'x;
@@ -228,11 +230,12 @@ module controller (
         memwrite = 2'b00;
         irwrite = 1'b0;
         case (opcode)
-          LB:  regwrite = 3'b010;
-          LH:  regwrite = 3'b100;
+          LB: regwrite = 3'b010;
+          LH: regwrite = 3'b100;
           LBU: regwrite = 3'b001;
           LHU: regwrite = 3'b011;
-          LW:  regwrite = 3'b101;
+          LW: regwrite = 3'b101;
+          default: regwrite = 'x;
         endcase
 
         branch  = 1'b0;
@@ -254,6 +257,7 @@ module controller (
           SB: memwrite = 2'b01;
           SH: memwrite = 2'b10;
           SW: memwrite = 2'b11;
+          default: memwrite = 'x;
         endcase
         irwrite  = 1'b0;
         regwrite = 3'b000;
@@ -266,6 +270,7 @@ module controller (
         case (opcode)
           MOV, ADD, SUB, AND, OR, XOR, SLL, SRL, SRA: nextstate = S7;
           SLT, SLTU: nextstate = S8;
+          default: nextstate = S0;
         endcase
 
         iord = 'x;
@@ -274,17 +279,18 @@ module controller (
         alusrca = 2'b10;
         alusrcb = 2'b00;
         case (opcode)
-          MOV:  alucontrol = 5'b00000;
-          ADD:  alucontrol = 5'b00001;
-          SUB:  alucontrol = 5'b00010;
-          AND:  alucontrol = 5'b00011;
-          OR:   alucontrol = 5'b00100;
-          XOR:  alucontrol = 5'b00101;
-          SLL:  alucontrol = 5'b00110;
-          SRL:  alucontrol = 5'b00111;
-          SRA:  alucontrol = 5'b01000;
-          SLT:  alucontrol = 5'b01110;
+          MOV: alucontrol = 5'b00000;
+          ADD: alucontrol = 5'b00001;
+          SUB: alucontrol = 5'b00010;
+          AND: alucontrol = 5'b00011;
+          OR: alucontrol = 5'b00100;
+          XOR: alucontrol = 5'b00101;
+          SLL: alucontrol = 5'b00110;
+          SRL: alucontrol = 5'b00111;
+          SRA: alucontrol = 5'b01000;
+          SLT: alucontrol = 5'b01110;
           SLTU: alucontrol = 5'b01011;
+          default: alucontrol = 'x;
         endcase
         pcsrc = 'x;
 
@@ -346,6 +352,7 @@ module controller (
           SLLI: alucontrol = 5'b00110;
           SRLI: alucontrol = 5'b00111;
           SRAI: alucontrol = 5'b01000;
+          default: alucontrol = 'x;
         endcase
         pcsrc = 'x;
 
@@ -366,12 +373,13 @@ module controller (
         alusrca = 2'b10;
         alusrcb = 2'b00;
         case (opcode)
-          BEQ:  alucontrol = 5'b01001;
-          BNQ:  alucontrol = 5'b01010;
-          BLT:  alucontrol = 5'b01110;
-          BGE:  alucontrol = 5'b10000;
+          BEQ: alucontrol = 5'b01001;
+          BNQ: alucontrol = 5'b01010;
+          BLT: alucontrol = 5'b01110;
+          BGE: alucontrol = 5'b10000;
           BLTU: alucontrol = 5'b01011;
           BGEU: alucontrol = 5'b01101;
+          default: alucontrol = 'x;
         endcase
         pcsrc = 1'b1;
 
@@ -392,13 +400,14 @@ module controller (
         alusrca = 2'b10;
         alusrcb = 2'b10;
         case (opcode)
-          ADDI:  alucontrol = 5'b00001;
-          ANDI:  alucontrol = 5'b00011;
-          ORI:   alucontrol = 5'b00100;
-          XORI:  alucontrol = 5'b00101;
-          SLTI:  alucontrol = 5'b01111;
+          ADDI: alucontrol = 5'b00001;
+          ANDI: alucontrol = 5'b00011;
+          ORI: alucontrol = 5'b00100;
+          XORI: alucontrol = 5'b00101;
+          SLTI: alucontrol = 5'b01111;
           SLTIU: alucontrol = 5'b01100;
-          LUI:   alucontrol = 5'b10001;
+          LUI: alucontrol = 5'b10001;
+          default: alucontrol = 'x;
         endcase
         pcsrc = 'x;
 
@@ -413,7 +422,8 @@ module controller (
       S12: begin
         case (opcode)
           JALR: nextstate = S13;
-          JAL:  nextstate = S14;
+          JAL: nextstate = S14;
+          default: nextstate = S0;
         endcase
 
         iord = 'x;
@@ -468,6 +478,25 @@ module controller (
 
         branch = 1'b0;
         pcwrite = 1'b1;
+      end
+
+      default: begin
+        nextstate = S0;
+
+        iord = 'x;
+        regdst = 'x;
+        memtoreg = 'x;
+        alusrca = 'x;
+        alusrcb = 'x;
+        alucontrol = 'x;
+        pcsrc = 'x;
+
+        memwrite = 'x;
+        irwrite = 'x;
+        regwrite = 'x;
+
+        branch = 'x;
+        pcwrite = 'x;
       end
     endcase
 endmodule
