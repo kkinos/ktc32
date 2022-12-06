@@ -3,10 +3,10 @@ addi r2, r0, 1
 
 lui r3, 27756
 addi r3, r3, 25928
-lui r4, 28535
+lui r4, 21579
 addi r4, r4, 8303
-lui r5, 11876
-addi r5, r5, 27762
+lui r5, 8498
+addi r5, r5, 13123
 addi r6, r0, 3338
 
 sw r3, r1, 8
