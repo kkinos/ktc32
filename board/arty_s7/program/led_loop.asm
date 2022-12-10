@@ -1,6 +1,5 @@
-lui r1, -16
-lui r2, 16
-addi r2, r2, 32767
+lui r1, 0xFFF0
+lui r2, 0x10
 addi r3, r0, 16
 
 mov r4, r0

@@ -1,13 +1,13 @@
-lui r1, -15
+lui r1, 0xFFF1
 addi r2, r0, 1
 
-lui r3, 27756
-addi r3, r3, 25928
-lui r4, 21579
-addi r4, r4, 8303
-lui r5, 8498
-addi r5, r5, 13123
-addi r6, r0, 3338
+lui r3, 0x6C6C
+addi r3, r3, 0x6548
+lui r4, 0x544B
+addi r4, r4, 0x206F
+lui r5, 0x2132
+addi r5, r5, 0x3343
+addi r6, r0, 0xD0A
 
 sw r3, r1, 8
 sw r2, r1, 0
