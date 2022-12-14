@@ -29,7 +29,7 @@ module led_loop_tb;
       txd
   );
 
-  initial $readmemh("../program/led_loop.mem", top.ram.mem);
+  initial $readmemh("../program/led_loop.mem", top.iobus.ram);
 
   initial begin
     $dumpfile("led_loop_tb.vcd");

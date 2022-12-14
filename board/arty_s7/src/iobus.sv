@@ -1,4 +1,4 @@
-module ram (
+module iobus (
     input logic clk,
     input logic reset,
     input logic [1:0] we,
@@ -10,7 +10,10 @@ module ram (
     output logic txd
 );
 
-  logic [7:0] mem[0:511];
+  logic [7:0] ram[0:511];
+  initial $readmemh("sample.mem", ram);
+
+  logic [31:0] io_addr;
 
   logic led_sel;
   logic [7:0] led_data;
@@ -20,13 +23,11 @@ module ram (
   logic [7:0] uart_tx_status;
   logic [7:0] uart_tx_data;
 
-  logic [31:0] io_addr;
 
-  initial $readmemh("led_loop.mem", mem);
 
+  assign io_addr  = {16'h0, addr[15:0]};
   assign led_sel  = (addr[31:16] == 16'hFFF0) ? 1 : 0;
   assign uart_sel = (addr[31:16] == 16'hFFF1) ? 1 : 0;
-  assign io_addr  = {16'h0, addr[15:0]};
 
   always_ff @(posedge clk) begin
     case (we)
@@ -42,7 +43,7 @@ module ram (
             uart_tx_data <= wd[7:0];
           end
         end else begin
-          mem[addr] <= wd[7:0];
+          ram[addr] <= wd[7:0];
         end
       end
       2'b10: begin
@@ -57,8 +58,8 @@ module ram (
             uart_tx_data <= wd[7:0];
           end
         end else begin
-          mem[addr]   <= wd[7:0];
-          mem[addr+1] <= wd[15:8];
+          ram[addr]   <= wd[7:0];
+          ram[addr+1] <= wd[15:8];
         end
       end
       2'b11: begin
@@ -73,10 +74,10 @@ module ram (
             uart_tx_data <= wd[7:0];
           end
         end else begin
-          mem[addr]   <= wd[7:0];
-          mem[addr+1] <= wd[15:8];
-          mem[addr+2] <= wd[23:16];
-          mem[addr+3] <= wd[31:24];
+          ram[addr]   <= wd[7:0];
+          ram[addr+1] <= wd[15:8];
+          ram[addr+2] <= wd[23:16];
+          ram[addr+3] <= wd[31:24];
         end
       end
       default;
@@ -98,7 +99,7 @@ module ram (
         data = {24'h0, uart_tx_data};
       end
     end else begin
-      data = {mem[addr+3], mem[addr+2], mem[addr+1], mem[addr]};
+      data = {ram[addr+3], ram[addr+2], ram[addr+1], ram[addr]};
     end
   end
 

@@ -29,7 +29,7 @@ module serial_send_tb;
       txd
   );
 
-  initial $readmemh("../program/serial_send.mem", top.ram.mem);
+  initial $readmemh("../program/serial_send.mem", top.iobus.ram);
 
   initial begin
     $dumpfile("serial_send_tb.vcd");

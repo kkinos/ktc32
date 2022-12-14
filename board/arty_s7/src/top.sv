@@ -24,7 +24,7 @@ module top (
       wd
   );
 
-  ram ram (
+  iobus iobus (
       clk,
       reset,
       memwrite,
