@@ -7,11 +7,12 @@ ARTYS7_SRCS:=$(ARTYS7_SRC_DIR)/top.sv $(ARTYS7_SRC_DIR)/iobus.sv $(ARTYS7_SRC_DI
 
 LEDLOOP_PRG:=../program/led_loop.mem
 SERIALSEND_PRG:=../program/serial_send.mem
+SAMPLE_PRG:=../program/sample.mem
 
 .SILENT:
 
 .PHONY: all
-all: led_loop_tb.vcd serial_send_tb.vcd
+all: led_loop_tb.vcd serial_send_tb.vcd sample_tb.vcd
 
 led_loop_tb.vcd: led_loop_tb
 	vvp led_loop_tb
@@ -24,6 +25,12 @@ serial_send_tb.vcd: serial_send_tb
 
 serial_send_tb: serial_send_tb.sv $(SRCS) $(ARTYS7_SRCS) $(SERIALSEND_PRG)
 	iverilog -g 2012 -o serial_send_tb -s serial_send_tb serial_send_tb.sv $(ARTYS7_SRCS) $(SRCS)
+
+sample_tb.vcd: sample_tb
+	vvp sample_tb
+
+sample_tb: sample_tb.sv $(SRCS) $(ARTYS7_SRCS) $(SAMPLE_PRG)
+	iverilog -g 2012 -o sample_tb -s sample_tb sample_tb.sv $(ARTYS7_SRCS) $(SRCS)
 
 .PHONY: clean
 clean:

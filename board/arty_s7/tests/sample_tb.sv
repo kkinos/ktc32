@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-module led_loop_tb;
+module sample_tb;
 
   logic clk, reset;
   logic [3:0] led;
@@ -19,7 +19,7 @@ module led_loop_tb;
     reset = 1;
     #STEP reset = 0;
     #(STEP * 4) reset = 1;
-    #(STEP * 10000) $finish;
+    #(STEP * 500000) $finish;
   end
 
   top top (
@@ -29,11 +29,11 @@ module led_loop_tb;
       txd
   );
 
-  initial $readmemh("../program/led_loop.mem", top.iobus.ram);
+  initial $readmemh("../program/sample.mem", top.iobus.ram);
 
   initial begin
-    $dumpfile("led_loop_tb.vcd");
-    $dumpvars(0, led_loop_tb);
+    $dumpfile("sample_tb.vcd");
+    $dumpvars(0, sample_tb);
   end
 
 endmodule
