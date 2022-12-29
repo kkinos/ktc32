@@ -1,6 +1,7 @@
 module top (
     input logic clk,
     input logic n_reset,
+    input logic rxd,
 
     output logic [3:0] led,
     output logic txd
@@ -30,6 +31,7 @@ module top (
       memwrite,
       addr,
       wd,
+      rxd,
 
       rd,
       led,

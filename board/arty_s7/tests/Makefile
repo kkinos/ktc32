@@ -3,7 +3,8 @@ SRCS:=$(SRC_DIR)/ktc32.sv $(SRC_DIR)/controller.sv $(SRC_DIR)/datapath.sv $(SRC_
 	 $(SRC_DIR)/mux2.sv $(SRC_DIR)/mux3.sv $(SRC_DIR)/mux4.sv $(SRC_DIR)/regfile.sv $(SRC_DIR)/alu.sv
 
 ARTYS7_SRC_DIR:=../src
-ARTYS7_SRCS:=$(ARTYS7_SRC_DIR)/top.sv $(ARTYS7_SRC_DIR)/iobus.sv $(ARTYS7_SRC_DIR)/uart_tx.sv 
+ARTYS7_SRCS:=$(ARTYS7_SRC_DIR)/top.sv $(ARTYS7_SRC_DIR)/iobus.sv $(ARTYS7_SRC_DIR)/uart.sv $(ARTYS7_SRC_DIR)/uart_tx.sv \
+	$(ARTYS7_SRC_DIR)/uart_rx.sv 
 
 LEDLOOP_PRG:=../program/led_loop.mem
 SERIALSEND_PRG:=../program/serial_send.mem

@@ -8,7 +8,7 @@ module uart_tx (
     output logic busy
 );
 
-  parameter WAITCNT = 105;  // 100MHz 115.2 kbps
+  parameter WAITCNT = 105;  // 12MHz 115.2 kbps
   localparam WAITCNTLEN = $clog2(WAITCNT);
 
   typedef enum {
@@ -17,9 +17,9 @@ module uart_tx (
   } state_type;
 
   state_type state;
-  logic [9:0] data;
   logic [WAITCNTLEN-1:0] waitcnt;
   logic [3:0] bitcnt;
+  logic [9:0] data;
 
   assign dout = data[0];
 

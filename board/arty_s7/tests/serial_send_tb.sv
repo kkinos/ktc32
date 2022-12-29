@@ -3,6 +3,8 @@
 module serial_send_tb;
 
   logic clk, reset;
+  logic rxd;
+
   logic [3:0] led;
   logic txd;
 
@@ -25,6 +27,8 @@ module serial_send_tb;
   top top (
       clk,
       reset,
+      rxd,
+
       led,
       txd
   );

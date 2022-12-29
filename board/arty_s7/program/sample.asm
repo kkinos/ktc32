@@ -10,12 +10,10 @@ load_msg:
 	jal r0, start_led_loop
 
 send_msg:
-	sw r4, r1, 8
-	sw r2, r1, 0
-	sw r0 ,r1, 0
+	sw r4, r1, 4
 
 wait_msg:
-	lbu r5, r1, 4
+	lbu r5, r1, 0
 	beq r5, r0, 4
 	jal r0, wait_msg
 	jal r0, load_msg
