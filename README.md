@@ -2,6 +2,16 @@
 
 A hobby 32-bit CPU implemented in SystemVerilog
 
+## Related Repo
+
+### ktc32 assembler
+
+[ktc32-asm](https://github.com/kinpoko/ktc32-asm)
+
+### ktc32 emulator written in Rust
+
+[ktc32-emu](https://github.com/kinpoko/ktc32-emu)
+
 ## Instruction Set
 
 KTC32 has four formats of instruction.
