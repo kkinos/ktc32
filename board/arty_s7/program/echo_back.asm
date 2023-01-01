@@ -9,11 +9,11 @@ loop:
 	jal r0, loop
 
 getc:
-	lbu r5, r1, 0xc
+	lbu r5, r1, 0x8
 	andi r5, r5, 2
 	beq r5, r3, 4
 	jal r0, load_zero
-	lbu r6, r1, 0x10
+	lbu r6, r1, 0xc
 	jalr r0, r4, 0
 
 load_zero:
