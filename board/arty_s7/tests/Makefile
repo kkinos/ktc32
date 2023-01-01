@@ -13,7 +13,7 @@ SAMPLE_PRG:=../program/sample.mem
 .SILENT:
 
 .PHONY: all
-all: led_loop_tb.vcd serial_send_tb.vcd sample_tb.vcd
+all: led_loop_tb.vcd serial_send_tb.vcd sample_tb.vcd 
 
 led_loop_tb.vcd: led_loop_tb
 	vvp led_loop_tb
@@ -32,6 +32,10 @@ sample_tb.vcd: sample_tb
 
 sample_tb: sample_tb.sv $(SRCS) $(ARTYS7_SRCS) $(SAMPLE_PRG)
 	iverilog -g 2012 -o sample_tb -s sample_tb sample_tb.sv $(ARTYS7_SRCS) $(SRCS)
+
+.PHONY: asm
+asm:
+	make -C ../program
 
 .PHONY: clean
 clean:
