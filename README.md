@@ -1,16 +1,19 @@
 # KTC32
 
-A hobby 32-bit CPU implemented in SystemVerilog
+A hobby 32-bit CPU implemented in SystemVerilog.
 
-## Related Repo
-
-### ktc32 assembler
-
-[ktc32-asm](https://github.com/kinpoko/ktc32-asm)
-
-### ktc32 emulator
-
-[ktc32-emu](https://github.com/kinpoko/ktc32-emu)
+- [KTC32](#ktc32)
+	- [Instruction Set](#instruction-set)
+	- [Peripherals](#peripherals)
+	- [Design](#design)
+		- [CPU](#cpu)
+		- [Controller's FSM](#controllers-fsm)
+	- [Running Test Benches](#running-test-benches)
+		- [Required](#required)
+	- [Related Projects](#related-projects)
+		- [KTC32 assembler](#ktc32-assembler)
+		- [KTC32 emulator](#ktc32-emulator)
+	- [Reference](#reference)
 
 ## Instruction Set
 
@@ -58,13 +61,23 @@ KTC32 has four formats of instruction.
 | SW          | I32    | 110101 | M[x[rs] + sext(imm)] = x[rd]                   | sw rd, rs, imm    |
 | JAL         | J      | 111111 | x[rd] = pc, pc += sext(imm)                    | jal rd, imm       |
 
+## Peripherals
+
+| Address    | Name           | Bit   | Description                                                                                   | Read/Write |
+| ---------- | -------------- | ----- | --------------------------------------------------------------------------------------------- | ---------- |
+| 0xfff00000 | LED_DATA       | [3:0] | 0 : off 1 : on                                                                                | Read/Write |
+| 0xfff10000 | UART_TX_STATUS | [0]   | 0 : idle 1 : transmitting                                                                     | Read Only  |
+| 0xfff10004 | UART_TX_DATA   | [7:0] | when this register written, start to transmit data                                            | Read/Write |
+| 0xfff10008 | UART_RX_STATUS | [1:0] | bit 0 UART status<br> 0 : idle 1 : receiving<br>bit 1 data validity<br> 0 : invalid 1 : valid | Read Only  |
+| 0xfff1000c | UART_RX_DATA   | [7:0] | when read this register, data validity changes to invalid                                     | Read Only  |
+
 ## Design
 
-### RTL
+### CPU
 
 ![rtl](docs/rtl.drawio.png)
 
-### FSM
+### Controller's FSM
 
 ![fsm](docs/fsm.drawio.png)
 
@@ -80,6 +93,18 @@ make
 
 - Icarus Verilog
 
+## Related Projects
+
+### KTC32 assembler
+
+[ktc32-asm](https://github.com/kinpoko/ktc32-asm)
+
+### KTC32 emulator
+
+[ktc32-emu](https://github.com/kinpoko/ktc32-emu)
+
 ## Reference
 
-デイビット・マネー・ハリス、サラ・L・ハリス (2009) 『ディジタル電子回路とコンピュータアーキテクチャ 第 2 版』(天野英晴・鈴木貢・中條拓伯・永松礼夫訳) 翔泳社(Digital Design and Computer Architecture Second Edition)
+- デイビット・マネー・ハリス、サラ・L・ハリス (2009) 『ディジタル電子回路とコンピュータアーキテクチャ 第 2 版』(天野英晴・鈴木貢・中條拓伯・永松礼夫訳) 翔泳社 (Digital Design and Computer Architecture Second Edition)
+
+- 中森章 (2022) 「FPGA 初心者は自作マイコンの夢を見るか？ RISC-V on FPGA 実装計画 第 2 回 UART の実装」 『Interface』 2022 年 9 月号, CQ 出版社
