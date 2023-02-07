@@ -11,7 +11,7 @@ module iobus (
     output logic txd
 );
 
-  logic [7:0] ram[0:511];
+  logic [7:0] ram[0:767];
   initial $readmemh("sample.mem", ram);
 
   logic [31:0] io_addr;
