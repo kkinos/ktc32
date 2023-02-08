@@ -79,7 +79,7 @@ module alu (
       end
       5'b10001: begin
         res  = srcb << 16;
-        flag = 'x;
+        flag = 0;
       end
       default: begin
         res  = 'x;
