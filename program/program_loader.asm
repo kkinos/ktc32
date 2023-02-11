@@ -9,22 +9,22 @@ return:
 	lbu r2, r1, 0
 	beq r2, r0, 4
 	jal r0, -12
-	sb r4, r2, 4
-	srli r4, 8
+	sb r5, r1, 4
+	srli r5, 8
 	lbu r2, r1, 0
 	beq r2, r0, 4
 	jal r0, -12
-	sb r4, r2, 4
-	srli r4, 8
+	sb r5, r1, 4
+	srli r5, 8
 	lbu r2, r1, 0
 	beq r2, r0, 4
 	jal r0, -12
-	sb r4, r2, 4
-	srli r4, 8
+	sb r5, r1, 4
+	srli r5, 8
 	lbu r2, r1, 0
 	beq r2, r0, 4
 	jal r0, -12
-	sb r4, r2, 4
+	sb r5, r1, 4
 	jal r0, start
 
 check_header:
@@ -42,7 +42,6 @@ check_header:
 	or r5, r4
 	addi r6, r0, 256
 	mov r7, r0
-	mov r8, r6
 	jal r0, load_program
 
 read_data:
@@ -70,28 +69,6 @@ init:
 	mov r5, r0
 	mov r6, r0
 	mov r7, r0
-	mov r8, r0
-	mov r9, r0
-	mov r10, r0
-	mov r11, r0
-	mov r12, r0
-	mov r13, r0
-	mov r14, r0
-	mov r15, r0
-	mov r16, r0
-	mov r17, r0
-	mov r18, r0
-	mov r19, r0
-	mov r20, r0
-	mov r21, r0
-	mov r22, r0
-	mov r23, r0
-	mov r24, r0
-	mov r25, r0
-	mov r26, r0
-	mov r27, r0
-	mov r28, r0
-	mov r29, r0
-	mov r30, r0
-	mov r31, r0
-	jalr r0, r8, 0
+	addi r3, r0, 767
+	addi r4, r0, 767
+	jalr r0, r0, 256
