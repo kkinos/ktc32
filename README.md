@@ -2,19 +2,6 @@
 
 A hobby 32-bit CPU implemented in SystemVerilog.
 
-- [KTC32](#ktc32)
-	- [Instruction Set](#instruction-set)
-	- [Peripherals](#peripherals)
-	- [Design](#design)
-		- [CPU](#cpu)
-		- [Controller's FSM](#controllers-fsm)
-	- [Running Test Benches](#running-test-benches)
-		- [Required](#required)
-	- [Related Projects](#related-projects)
-		- [KTC32 assembler](#ktc32-assembler)
-		- [KTC32 emulator](#ktc32-emulator)
-	- [Reference](#reference)
-
 ## Instruction Set
 
 KTC32 has four formats of instruction.
