@@ -12,7 +12,7 @@ module iobus (
 );
 
   logic [7:0] ram[0:767];
-  initial $readmemh("sample.mem", ram);
+  initial $readmemh("program_loader.mem", ram);
 
   logic [31:0] io_addr;
 
