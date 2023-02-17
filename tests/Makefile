@@ -21,7 +21,7 @@ all: $(TARGET)
 	sed -e 's/inst/$(*F)/g' $< > $@
 
 %.mem: asm/%.asm
-	ktc32-asm $< -o $@
+	ktc32-asm $< -o $@ -b
 
 .PHONY: clean
 clean:

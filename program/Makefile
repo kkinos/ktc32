@@ -5,4 +5,4 @@ TARGET:=$(ASM:.asm=.mem)
 all: $(TARGET)
 
 %.mem: %.asm
-	ktc32-asm $< -o $@
+	ktc32-asm $< -o $@ -b
