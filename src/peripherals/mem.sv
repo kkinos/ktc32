@@ -1,4 +1,4 @@
-module iobus (
+module mem (
     input logic clk,
     input logic reset,
     input logic [1:0] we,
