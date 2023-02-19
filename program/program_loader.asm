@@ -1,9 +1,16 @@
 start:
+	mov r1, r0
+	mov r2, r0
+	mov r3, r0
+	mov r4, r0
+	mov r5, r0
+	mov r6, r0
+	mov r7, r0
 	lui r1, 0xfff1
 	addi r2, r0, 2
 	jal r0, check_header
 
-// address 12
+// address 26
 return:
 	lui r1, 0xfff1
 	lbu r2, r1, 0
