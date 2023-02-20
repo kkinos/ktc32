@@ -8,8 +8,8 @@ module uart_rx (
     output logic valid
 );
 
-  parameter WAITCNT = 105;  // 12MHz 115.2 kbps
-  parameter HALFWAITCNT = 53;
+  parameter WAITCNT = 1260;  // 12MHz 9600bps
+  parameter HALFWAITCNT = 630;
   localparam WAITCNTLEN = $clog2(WAITCNT);
 
   typedef enum {
