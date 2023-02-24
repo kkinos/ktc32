@@ -2,9 +2,16 @@
 
 A hobby 32-bit CPU implemented in SystemVerilog.
 
-## Instruction Set
+## Features
 
-KTC32 has four formats of instruction.
+- Follows the Von Neumann architecture
+- Supports 16-bit and 32-bit instruction
+- Includes 4 LED outputs and a UART peripheral
+- Can be run on a FPGA development board
+
+## Instructions
+
+This CPU can execute both 16-bit and 32-bit instructions. The instructions come in four different formats.
 
 ![instruction formats](docs/instruction_formats.drawio.png)
 
@@ -50,6 +57,8 @@ KTC32 has four formats of instruction.
 
 ## Peripherals
 
+This CPU includes four LED outputs that can be controlled by writing to specific memory addresses. It also has a UART peripheral for serial communication.
+
 | Address    | Name           | Bit   | Description                                                                                   | Read/Write |
 | ---------- | -------------- | ----- | --------------------------------------------------------------------------------------------- | ---------- |
 | 0xfff00000 | LED_DATA       | [3:0] | 0 : off 1 : on                                                                                | Read/Write |
@@ -58,40 +67,32 @@ KTC32 has four formats of instruction.
 | 0xfff10008 | UART_RX_STATUS | [1:0] | bit 0 UART status<br> 0 : idle 1 : receiving<br>bit 1 data validity<br> 0 : invalid 1 : valid | Read Only  |
 | 0xfff1000c | UART_RX_DATA   | [7:0] | when read this register, data validity changes to invalid                                     | Read Only  |
 
-## Design
-
-### CPU
-
-![rtl](docs/rtl.drawio.png)
-
-### Controller's FSM
-
-![fsm](docs/fsm.drawio.png)
-
 ## Running Test Benches
 
-```bash
-make
-```
-
-### Required
+To run test benches, you need:
 
 - [ktc32-asm](https://github.com/kinpoko/ktc32-asm)
 
 - Icarus Verilog
 
-## Related Projects
+After installing the necessary dependencies, run the following command:
 
-### KTC32 assembler
+```bash
+make
+```
 
-[ktc32-asm](https://github.com/kinpoko/ktc32-asm)
+## Supported Boards
 
-### KTC32 emulator
-
-[ktc32-emu](https://github.com/kinpoko/ktc32-emu)
+- Arty S7
 
 ## Reference
 
 - デイビット・マネー・ハリス、サラ・L・ハリス (2009) 『ディジタル電子回路とコンピュータアーキテクチャ 第 2 版』(天野英晴・鈴木貢・中條拓伯・永松礼夫訳) 翔泳社 (Digital Design and Computer Architecture Second Edition)
 
 - 中森章 (2022) 「FPGA 初心者は自作マイコンの夢を見るか？ RISC-V on FPGA 実装計画 第 2 回 UART の実装」 『Interface』 2022 年 9 月号, CQ 出版社
+
+## Related Projects
+
+- KTC32 assembler: [ktc32-asm](https://github.com/kinpoko/ktc32-asm)
+
+- KTC32 emulator: [ktc32-emu](https://github.com/kinpoko/ktc32-emu)
