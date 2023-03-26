@@ -69,6 +69,7 @@ init:
 	mov r5, r0
 	mov r6, r0
 	mov r7, r0
+	addi r1, r0, 12
 	addi r3, r0, 767
 	addi r4, r0, 767
 	jalr r0, r0, 256
