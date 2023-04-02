@@ -95,4 +95,6 @@ make
 
 - KTC32 assembler: [ktc32-asm](https://github.com/kinpoko/ktc32-asm)
 
+- KTC32 compiler: [ktc32-com](https://github.com/kinpoko/ktc32-com)
+
 - KTC32 emulator: [ktc32-emu](https://github.com/kinpoko/ktc32-emu)
